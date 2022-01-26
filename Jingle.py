@@ -1,26 +1,20 @@
-def super_digito(str_numero):
-    lista = []
-    contador = 0
-    lista.append(str_numero)
-    
-    sup = list(map(int, str_numero))
-    
-    soma = sum(sup)
-    
-#     print(soma)
-    
-    while soma > 9:
-        novo_num = str(soma)
-        lista.append(novo_num)
-        soma = super_digito(novo_num)
-        
-#     print(lista)
-    return(soma)
+notas = {'W':1, 'H':1/2, 'Q':1/4, 'E':1/8, 'S':1/16, 'T':1/32, 'X':1/64}
 
-print('\::: Bem vindo ao cálculo de super dígito :::\n')
-n = int(input('Digite um número:'))
-k = int(input('Digite um número:'))
-str_numero = str(k*n)
+incorretos = []
+corretos = 0
 
-resultado = super_digito(str_numero)
-print('O super dígito do produto dos números digitados é', resultado)
+musica = input('Insira sua composição [Utilize "/" para separar os compassos]:')
+musica = musica.upper()
+musica = musica.split('/')
+
+for compasso in musica:
+    soma = 0
+    for nota in compasso:
+        soma += notas[nota]
+    if soma != 1:
+        incorretos.append(compasso)
+    else:
+        corretos += 1
+
+print(f'''Número de compassos corretos:', {corretos}
+Compassos incorretos: [{', '.join(incorretos)}]''')
